@@ -12,8 +12,13 @@ import {
   PriceListType,
 } from "../types"
 
+type ExtendedPriceListFields = {
+  applied_start_date: string;
+  applied_end_date: string
+}
+
 export const mapPriceListToFormValues = (
-  priceList: PriceList
+  priceList: PriceList & ExtendedPriceListFields
 ): PriceListFormValues => {
   return {
     description: priceList.description,
@@ -21,6 +26,8 @@ export const mapPriceListToFormValues = (
     name: priceList.name,
     ends_at: priceList.ends_at ? new Date(priceList.ends_at) : null,
     starts_at: priceList.starts_at ? new Date(priceList.starts_at) : null,
+    applied_start_date: priceList.applied_start_date ? new Date(priceList.applied_start_date) : null,
+    applied_end_date: priceList.applied_end_date ? new Date(priceList.applied_end_date) : null,
     prices: priceList.prices.map((p) => ({
       amount: p.amount,
       max_quantity: p.max_quantity,
@@ -40,7 +47,7 @@ export const mapPriceListToFormValues = (
 export const mapFormValuesToCreatePriceList = (
   values: CreatePriceListFormValues,
   status: PriceListStatus
-): AdminPostPriceListsPriceListReq => {
+): AdminPostPriceListsPriceListReq & { applied_start_date?: Date, applied_end_date?: Date} => {
   let prices
   if (values.prices) {
     prices = Object.entries(values.prices)
@@ -66,13 +73,15 @@ export const mapFormValuesToCreatePriceList = (
       : undefined,
     ends_at: values.ends_at || undefined,
     starts_at: values.starts_at || undefined,
+    applied_start_date: values.applied_start_date || undefined,
+    applied_end_date: values.applied_end_date || undefined,
     prices,
   }
 }
 
 export const mapFormValuesToUpdatePriceListDetails = (
   values: PriceListFormValues
-): AdminPostPriceListsPriceListPriceListReq => {
+): AdminPostPriceListsPriceListPriceListReq & { applied_start_date?: Date, applied_end_date?: Date} => {
   return {
     name: values.name || undefined,
     description: values.description || undefined,
@@ -81,6 +90,8 @@ export const mapFormValuesToUpdatePriceListDetails = (
       : [],
     ends_at: values.ends_at,
     starts_at: values.starts_at,
+    applied_start_date: values.applied_start_date || undefined,
+    applied_end_date: values.applied_end_date || undefined,
     type: values.type || undefined,
   }
 }

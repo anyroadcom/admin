@@ -29,7 +29,7 @@ const defaultState: PriceListFormValues = {
 const PriceListFormContext = React.createContext<{
   configFields: Pick<
     PriceListFormValues,
-    "starts_at" | "ends_at" | "customer_groups"
+    "starts_at" | "ends_at" | "customer_groups" | "applied_start_date" | "applied_end_date"
   >
   handleConfigurationSwitch: (values: string[]) => void
   prices: CreatePriceListPricesFormValues | null
@@ -50,11 +50,13 @@ export const PriceListFormProvider: React.FC<FormProviderProps> = ({
   children,
 }) => {
   const [configFields, setConfigFields] = useState<
-    Pick<PriceListFormValues, "starts_at" | "ends_at" | "customer_groups">
+    Pick<PriceListFormValues, "starts_at" | "ends_at" | "customer_groups" | "applied_start_date" | "applied_end_date">
   >({
     customer_groups: priceList.customer_groups,
     ends_at: priceList.ends_at,
     starts_at: priceList.starts_at,
+    applied_start_date: priceList.applied_start_date,
+    applied_end_date: priceList.applied_end_date
   })
   const methods = useForm<PriceListFormValues>({
     defaultValues: priceList,
@@ -77,6 +79,16 @@ export const PriceListFormProvider: React.FC<FormProviderProps> = ({
     control: methods.control,
   })
 
+  const currentAppliedStartDate = useWatch({
+    name: "applied_start_date",
+    control: methods.control
+  })
+
+  const currentAppliedEndDate = useWatch({
+    name: "applied_end_date",
+    control: methods.control
+  })
+
   const disableConfiguration = (configField: ConfigurationField) => {
     let configToSave: unknown | null = null
 
@@ -90,6 +102,13 @@ export const PriceListFormProvider: React.FC<FormProviderProps> = ({
       case "ends_at":
         configToSave = currentEndsAt
         break
+      case "applied_start_date":
+        configToSave = currentAppliedStartDate
+        break
+      case "applied_end_date":
+        configToSave = currentAppliedEndDate
+        break
+
     }
 
     // we save the configuration field value to the state, so that if the user re-enables the field we can populate it with the previous value
@@ -117,6 +136,12 @@ export const PriceListFormProvider: React.FC<FormProviderProps> = ({
           break
         case "customer_groups":
           methods.setValue("customer_groups", [])
+          break
+        case "applied_start_date":
+          methods.setValue("applied_start_date", new Date())
+          break
+        case "applied_end_date":
+          methods.setValue("applied_end_date", new Date())
           break
       }
     }

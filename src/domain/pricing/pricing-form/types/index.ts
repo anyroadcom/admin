@@ -34,7 +34,9 @@ export type PriceListFormValues = {
   customer_groups: Option[] | null
   type: PriceListType | null
   prices: PriceProps[] | null
-  includes_tax: boolean 
+  includes_tax: boolean
+  applied_start_date: Date | null
+  applied_end_date: Date | null
 }
 
 export type CreatePriceListPricesFormValues = {
@@ -49,17 +51,19 @@ export type CreatePriceListFormValues = {
   customer_groups: Option[] | null
   type: PriceListType | null
   prices: CreatePriceListPricesFormValues | null
-  includes_tax: boolean 
+  includes_tax: boolean
+  applied_start_date: Date | null
+  applied_end_date: Date | null
 }
 
 export type ConfigurationField = keyof Pick<
   PriceListFormValues,
-  "starts_at" | "ends_at" | "customer_groups"
+  "starts_at" | "ends_at" | "customer_groups" | "applied_start_date" | "applied_end_date"
 >
 
 export type ConfigurationFields = Pick<
   PriceListFormValues,
-  "starts_at" | "ends_at" | "customer_groups"
+  "starts_at" | "ends_at" | "customer_groups" | "applied_start_date" | "applied_end_date"
 >
 
 export enum PriceListStatus {
