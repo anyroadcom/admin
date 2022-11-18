@@ -32,11 +32,12 @@ export const analytics = AnalyticsBrowser.load({
 /**
  * Fetches the analytics config for the current user.
  */
-export const getAnalyticsConfig =
-  async (): Promise<AdminAnalyticsConfigRes> => {
-    const { data } = await client.get("/")
-    return data
-  }
+export const getAnalyticsConfig = async (): Promise<
+  AdminAnalyticsConfigRes
+> => {
+  const { data } = await client.get("/")
+  return data
+}
 
 type CreateConfigPayload = {
   opt_out: boolean

@@ -16,9 +16,7 @@ type ConfigurationProps = {
   priceList?: PriceList
 }
 
-const checkForEnabledConfigs = (
-  config: ConfigurationFields
-): string[] => {
+const checkForEnabledConfigs = (config: ConfigurationFields): string[] => {
   const enabledConfigs: string[] = []
 
   if (config.customer_groups && config.customer_groups.length > 0) {
@@ -30,13 +28,12 @@ const checkForEnabledConfigs = (
   if (config.ends_at) {
     enabledConfigs.push("ends_at")
   }
-    if (config.applied_start_date) {
-        enabledConfigs.push("applied_start_date")
-    }
-  if (config.applied_end_date) {
-      enabledConfigs.push("applied_end_date")
+  if (config.applied_start_date) {
+    enabledConfigs.push("applied_start_date")
   }
-
+  if (config.applied_end_date) {
+    enabledConfigs.push("applied_end_date")
+  }
 
   return enabledConfigs
 }
@@ -153,90 +150,90 @@ const Configuration: React.FC<ConfigurationProps> = () => {
               />
             </div>
           </Accordion.Item>
-            <Accordion.Item
-                headingSize="medium"
-                forceMountContent
-                className="border-b-0"
-                title="Have a date to apply the price to a booking?"
-                subtitle="Set a date at which bookings recieve the new price."
-                value="applied_start_date"
-                customTrigger={
-                    <Switch checked={openItems.indexOf("applied_start_date") > -1} />
+          <Accordion.Item
+            headingSize="medium"
+            forceMountContent
+            className="border-b-0"
+            title="Have a date to apply the price to a booking?"
+            subtitle="Set a date at which bookings recieve the new price."
+            value="applied_start_date"
+            customTrigger={
+              <Switch checked={openItems.indexOf("applied_start_date") > -1} />
+            }
+          >
+            <div
+              className={clsx(
+                "flex items-center gap-xsmall accordion-margin-transition",
+                {
+                  "mt-4": openItems.indexOf("applied_start_date") > -1,
                 }
+              )}
             >
-                <div
-                    className={clsx(
-                        "flex items-center gap-xsmall accordion-margin-transition",
-                        {
-                            "mt-4": openItems.indexOf("applied_start_date") > -1,
-                        }
-                    )}
-                >
-                    <Controller
-                        name="applied_start_date"
-                        control={control}
-                        render={({ field: { value, onChange } }) => {
-                            const ensuredDate = value || new Date()
-                            return (
-                                <>
-                                    <DatePicker
-                                        date={ensuredDate}
-                                        label="Start date"
-                                        onSubmitDate={onChange}
-                                    />
-                                    <TimePicker
-                                        date={ensuredDate}
-                                        label="Start date"
-                                        onSubmitDate={onChange}
-                                    />
-                                </>
-                            )
-                        }}
-                    />
-                </div>
-            </Accordion.Item>
-            <Accordion.Item
-                headingSize="medium"
-                forceMountContent
-                className="border-b-0"
-                title="Have a date that the applied price to a booking should end?"
-                subtitle="Set a date at which bookings stop recieving the new price."
-                value="applied_end_date"
-                customTrigger={
-                    <Switch checked={openItems.indexOf("applied_end_date") > -1} />
+              <Controller
+                name="applied_start_date"
+                control={control}
+                render={({ field: { value, onChange } }) => {
+                  const ensuredDate = value || new Date()
+                  return (
+                    <>
+                      <DatePicker
+                        date={ensuredDate}
+                        label="Start date"
+                        onSubmitDate={onChange}
+                      />
+                      <TimePicker
+                        date={ensuredDate}
+                        label="Start date"
+                        onSubmitDate={onChange}
+                      />
+                    </>
+                  )
+                }}
+              />
+            </div>
+          </Accordion.Item>
+          <Accordion.Item
+            headingSize="medium"
+            forceMountContent
+            className="border-b-0"
+            title="Have a date that the applied price to a booking should end?"
+            subtitle="Set a date at which bookings stop recieving the new price."
+            value="applied_end_date"
+            customTrigger={
+              <Switch checked={openItems.indexOf("applied_end_date") > -1} />
+            }
+          >
+            <div
+              className={clsx(
+                "flex items-center gap-xsmall accordion-margin-transition",
+                {
+                  "mt-4": openItems.indexOf("applied_end_date") > -1,
                 }
+              )}
             >
-                <div
-                    className={clsx(
-                        "flex items-center gap-xsmall accordion-margin-transition",
-                        {
-                            "mt-4": openItems.indexOf("applied_end_date") > -1,
-                        }
-                    )}
-                >
-                    <Controller
-                        name="applied_end_date"
-                        control={control}
-                        render={({ field: { value, onChange } }) => {
-                            const ensuredDate = value || new Date()
-                            return (
-                                <>
-                                    <DatePicker
-                                        date={ensuredDate}
-                                        label="End date"
-                                        onSubmitDate={onChange}
-                                    />
-                                    <TimePicker
-                                        date={ensuredDate}
-                                        label="End date"
-                                        onSubmitDate={onChange}
-                                    />
-                                </>
-                            )
-                        }}
-                    />
-                </div>
-            </Accordion.Item>
+              <Controller
+                name="applied_end_date"
+                control={control}
+                render={({ field: { value, onChange } }) => {
+                  const ensuredDate = value || new Date()
+                  return (
+                    <>
+                      <DatePicker
+                        date={ensuredDate}
+                        label="End date"
+                        onSubmitDate={onChange}
+                      />
+                      <TimePicker
+                        date={ensuredDate}
+                        label="End date"
+                        onSubmitDate={onChange}
+                      />
+                    </>
+                  )
+                }}
+              />
+            </div>
+          </Accordion.Item>
           <Accordion.Item
             headingSize="medium"
             forceMountContent
@@ -251,7 +248,7 @@ const Configuration: React.FC<ConfigurationProps> = () => {
             <Controller
               name="customer_groups"
               control={control}
-              render={({ field: { value, onChange, ref }}) => {
+              render={({ field: { value, onChange, ref } }) => {
                 return (
                   <div
                     className={clsx(

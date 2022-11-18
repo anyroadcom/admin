@@ -13,7 +13,7 @@ import {
 } from "../types"
 
 type ExtendedPriceListFields = {
-  applied_start_date: string;
+  applied_start_date: string
   applied_end_date: string
 }
 
@@ -26,8 +26,12 @@ export const mapPriceListToFormValues = (
     name: priceList.name,
     ends_at: priceList.ends_at ? new Date(priceList.ends_at) : null,
     starts_at: priceList.starts_at ? new Date(priceList.starts_at) : null,
-    applied_start_date: priceList.applied_start_date ? new Date(priceList.applied_start_date) : null,
-    applied_end_date: priceList.applied_end_date ? new Date(priceList.applied_end_date) : null,
+    applied_start_date: priceList.applied_start_date
+      ? new Date(priceList.applied_start_date)
+      : null,
+    applied_end_date: priceList.applied_end_date
+      ? new Date(priceList.applied_end_date)
+      : null,
     prices: priceList.prices.map((p) => ({
       amount: p.amount,
       max_quantity: p.max_quantity,
@@ -47,7 +51,10 @@ export const mapPriceListToFormValues = (
 export const mapFormValuesToCreatePriceList = (
   values: CreatePriceListFormValues,
   status: PriceListStatus
-): AdminPostPriceListsPriceListReq & { applied_start_date?: Date, applied_end_date?: Date} => {
+): AdminPostPriceListsPriceListReq & {
+  applied_start_date?: Date
+  applied_end_date?: Date
+} => {
   let prices
   if (values.prices) {
     prices = Object.entries(values.prices)
@@ -81,7 +88,10 @@ export const mapFormValuesToCreatePriceList = (
 
 export const mapFormValuesToUpdatePriceListDetails = (
   values: PriceListFormValues
-): AdminPostPriceListsPriceListPriceListReq & { applied_start_date?: Date, applied_end_date?: Date} => {
+): AdminPostPriceListsPriceListPriceListReq & {
+  applied_start_date?: Date
+  applied_end_date?: Date
+} => {
   return {
     name: values.name || undefined,
     description: values.description || undefined,

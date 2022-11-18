@@ -44,13 +44,15 @@ const LoginCard: React.FC<LoginCardProps> = ({ toResetPassword }) => {
         </span>
         <SigninInput
           placeholder="Email..."
-          {...register('email', { required: true })}
-          autoComplete="email" />
+          {...register("email", { required: true })}
+          autoComplete="email"
+        />
         <SigninInput
           placeholder="Password..."
           type={"password"}
-          {...register('password', { required: true })}
-          autoComplete="current-password" />
+          {...register("password", { required: true })}
+          autoComplete="current-password"
+        />
         {isInvalidLogin && (
           <span className="text-rose-50 w-full mt-2 inter-small-regular">
             These credentials do not match our records
@@ -73,7 +75,7 @@ const LoginCard: React.FC<LoginCardProps> = ({ toResetPassword }) => {
         </span>
       </div>
     </form>
-  );
+  )
 }
 
 export default LoginCard

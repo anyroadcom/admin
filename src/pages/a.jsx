@@ -32,16 +32,16 @@ const Routes = () => {
       <Layout>
         <SEO title="Medusa" />
         <Router basepath="a" className="h-full">
-          <Oauth path="oauth/:app_name"/>
-          <ProductsRoute path="products/*"/>
-          <Collections path="collections/*"/>
+          <Oauth path="oauth/:app_name" />
+          <ProductsRoute path="products/*" />
+          <Collections path="collections/*" />
           <GiftCards path="gift-cards/*" />
           <Orders path="orders/*" />
           <DraftOrders path="draft-orders/*" />
-          <Discounts path="discounts/*"/>
-          <Customers path="customers/*"/>
-          <Pricing path="pricing/*"/>
-          <Settings path="settings/*"/>
+          <Discounts path="discounts/*" />
+          <Customers path="customers/*" />
+          <Pricing path="pricing/*" />
+          <Settings path="settings/*" />
           <SalesChannels path="sales-channels/*" />
         </Router>
       </Layout>

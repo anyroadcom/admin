@@ -58,12 +58,20 @@ export type CreatePriceListFormValues = {
 
 export type ConfigurationField = keyof Pick<
   PriceListFormValues,
-  "starts_at" | "ends_at" | "customer_groups" | "applied_start_date" | "applied_end_date"
+  | "starts_at"
+  | "ends_at"
+  | "customer_groups"
+  | "applied_start_date"
+  | "applied_end_date"
 >
 
 export type ConfigurationFields = Pick<
   PriceListFormValues,
-  "starts_at" | "ends_at" | "customer_groups" | "applied_start_date" | "applied_end_date"
+  | "starts_at"
+  | "ends_at"
+  | "customer_groups"
+  | "applied_start_date"
+  | "applied_end_date"
 >
 
 export enum PriceListStatus {

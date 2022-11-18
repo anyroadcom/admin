@@ -29,7 +29,11 @@ const defaultState: PriceListFormValues = {
 const PriceListFormContext = React.createContext<{
   configFields: Pick<
     PriceListFormValues,
-    "starts_at" | "ends_at" | "customer_groups" | "applied_start_date" | "applied_end_date"
+    | "starts_at"
+    | "ends_at"
+    | "customer_groups"
+    | "applied_start_date"
+    | "applied_end_date"
   >
   handleConfigurationSwitch: (values: string[]) => void
   prices: CreatePriceListPricesFormValues | null
@@ -50,13 +54,20 @@ export const PriceListFormProvider: React.FC<FormProviderProps> = ({
   children,
 }) => {
   const [configFields, setConfigFields] = useState<
-    Pick<PriceListFormValues, "starts_at" | "ends_at" | "customer_groups" | "applied_start_date" | "applied_end_date">
+    Pick<
+      PriceListFormValues,
+      | "starts_at"
+      | "ends_at"
+      | "customer_groups"
+      | "applied_start_date"
+      | "applied_end_date"
+    >
   >({
     customer_groups: priceList.customer_groups,
     ends_at: priceList.ends_at,
     starts_at: priceList.starts_at,
     applied_start_date: priceList.applied_start_date,
-    applied_end_date: priceList.applied_end_date
+    applied_end_date: priceList.applied_end_date,
   })
   const methods = useForm<PriceListFormValues>({
     defaultValues: priceList,
@@ -81,12 +92,12 @@ export const PriceListFormProvider: React.FC<FormProviderProps> = ({
 
   const currentAppliedStartDate = useWatch({
     name: "applied_start_date",
-    control: methods.control
+    control: methods.control,
   })
 
   const currentAppliedEndDate = useWatch({
     name: "applied_end_date",
-    control: methods.control
+    control: methods.control,
   })
 
   const disableConfiguration = (configField: ConfigurationField) => {
@@ -108,7 +119,6 @@ export const PriceListFormProvider: React.FC<FormProviderProps> = ({
       case "applied_end_date":
         configToSave = currentAppliedEndDate
         break
-
     }
 
     // we save the configuration field value to the state, so that if the user re-enables the field we can populate it with the previous value
